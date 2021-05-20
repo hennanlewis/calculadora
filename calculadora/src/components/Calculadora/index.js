@@ -30,7 +30,7 @@ export function Calculadora() {
 
 			<div id="botoes">
 				{botoes.map(item => {
-					let tipo = parseInt(item) || parseInt(item) == 0 ? 'numero' : 'operador'
+					let tipo = parseInt(item) || parseInt(item) === 0 ? 'numero' : 'operador'
 
 					return <Botoes 
 								tipo={tipo} 
