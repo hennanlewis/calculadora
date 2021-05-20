@@ -16,9 +16,9 @@ export function Calculadora() {
 	const [resultado, setResultado] = useState('0')
 	const [operacao, setOperacao] = useState('0')
 
-	function mudaVisor(tipo, valor) {
+	function mudaVisor(valor) {
+		setOperacao(valor)
 		setResultado(valor)
-		setOperacao(tipo)
 	}
 
 	return (
@@ -41,7 +41,7 @@ export function Calculadora() {
 								tipo={tipo} 
 								classe={item === '.' ? 'numero' : tipo} 
 								children={item}
-								onClick={mudaVisor(tipo, item)}
+								onClick={() => mudaVisor(item)}
 							/>
 				})}
 			</div>
