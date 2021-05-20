@@ -5,9 +5,6 @@ import Botoes from '../Botoes'
 import './style.css'
 
 export function Calculadora() {
-	const [resultado, setResultado] = useState('0')
-	const [operacao, setOperacao] = useState('0')
-
 	const botoes = [
 			'AC', 'X', '^', '/',
 			'7', '8', '9', '*',
@@ -15,6 +12,14 @@ export function Calculadora() {
 			'1', '2', '3','+',
 			'0', '00', '.', '=',
 		]
+
+	const [resultado, setResultado] = useState('0')
+	const [operacao, setOperacao] = useState('0')
+
+	function mudaVisor(tipo, valor) {
+		setResultado(valor)
+		setOperacao(tipo)
+	}
 
 	return (
 		<div id="calculadora">
@@ -36,6 +41,7 @@ export function Calculadora() {
 								tipo={tipo} 
 								classe={item === '.' ? 'numero' : tipo} 
 								children={item}
+								onClick={mudaVisor(tipo, item)}
 							/>
 				})}
 			</div>
