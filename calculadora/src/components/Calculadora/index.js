@@ -26,11 +26,11 @@ export function Calculadora() {
 			<div id="calculadora">
 				<span id="calculadora-span2"></span>
 				<div id="visor">
-					<div className="operacao">
+					<div id="operacao">
 						{operacao}
 					</div>
 
-					<div className="resultado">
+					<div id="resultado">
 						{resultado}
 					</div>
 				</div>
