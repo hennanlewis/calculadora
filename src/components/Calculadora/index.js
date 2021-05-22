@@ -17,7 +17,9 @@ export function Calculadora() {
 	const [operacao, setOperacao] = useState('0')
 
 	function mudaVisor(valor) {
-		setOperacao(oldValue => setOperacao(oldValue + '' + valor))
+		valor
+			? setOperacao(oldValue => setOperacao(oldValue + '' + valor))
+			: setResultado(valor)
 	}
 
 	return (
