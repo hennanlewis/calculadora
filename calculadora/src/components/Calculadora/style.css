@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap');
+
 * {
+	font-family: 'Quicksand', sans-serif;
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 html {
@@ -8,37 +12,123 @@ html {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	background-color: #191919;
+	background-color: #292929;
 }
 
-div#calculadora {
-	background-color: black;
+body {
+	position: relative;
+	overflow: hidden;
+}
+
+#calculadora {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: end;
+	height: 400px;
 	width: 250px;
+	background-color: #FFFFFF28;
+	border-radius: 18px;
 	padding: 10px;
+	border-top: 1.5px solid #FFF1;
+	border-left: 1.5px solid #FFF1;
+	border-bottom: 2px solid #0002;
+	border-right: 2px solid #0002;
+	overflow: hidden;
+}
+
+#calculadora-span1,
+#calculadora-span2 {
+	position: absolute;
+	width: 90px;
+	height: 90px;
+	z-index: -2;
+	border-radius: 50%;
+	background-color: red;
+	animation: move-circle 6s ease-in-out infinite alternate;
+}
+
+#calculadora-span2 {
+	filter: blur(10px);
+	width: 100px;
+	height: 100px;
+	top: -5px;
+	left: -5px;
+}
+
+@keyframes move-circle {
+	from {
+		transform: translateX(100px);
+	}
+	to {
+		transform: translateX(-100px);
+	}
 }
 
 #visor {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	height: 50px;
-	color: #000;
-	background-color: #BBB;
+	justify-content: end;
+	flex-grow: 2;
 	text-align: right;
-	padding: 5px 20px;
+}
+
+#visor .operacao,
+#visor .resultado {
+	color: #FFF;
 }
 
 #botoes {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	text-align: center;
+	display: flex;
+	flex-grow: 5;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	border-radius: 10px;
+	width: 100%;
+	box-shadow: inset 5px 0 10px #0002;
+	border-top: 1px solid #FFF1;
+	border-left: 1px solid #FFF1;
 }
 
-#botoes .numero {
-	background-color: #BBB;
+#botoes .numero,
+#botoes .operador {
+	color: #FFF;
+	background-color: #29292920;
+	width: 25%;
+	border: none;
+	font-weight: 600;
+	cursor: pointer;
+	transition: .3s;
+}
+
+#botoes .numero:hover {
+	background-color: #00A0A090;
+	border-radius: 10px;
+}
+
+#botoes .operador:hover {
+	background-color: #00808090;
 }
 
 #botoes .operador {
-	color: #FFF;
-	background-color: #000;
+
+	background-color: #FFC10755;
+}
+
+#botoes *:nth-child(1) {
+	border-radius: 10px 0 0 10px;
+}
+
+#botoes *:nth-child(4) {
+	border-radius: 0 10px 0 0;
+}
+
+#botoes *:nth-last-child(1) {
+	border-radius: 0 0 10px 10px;
+}
+
+#botoes *:nth-last-child(4) {
+	border-radius: 0 0 0 10px;
 }
