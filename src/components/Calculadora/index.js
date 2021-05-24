@@ -3,30 +3,20 @@ import React, { useState } from 'react'
 import Botoes from '../Botoes'
 
 import './style.css'
+import botoes from '../../services/botoes'
 
 export function Calculadora() {
-	const botoes = [
-			'AC', '×', '^', '/',
-			'7', '8', '9', '*',
-			'4', '5', '6', '-',
-			'1', '2', '3', '+',
-			'0', '00', '.', '=',
-		]
-
 	const [resultado, setResultado] = useState('0')
 	const [operacao, setOperacao] = useState('0')
 
-	function mudaVisor(valor) {
-		valor
-			? setOperacao(oldValue => setOperacao(oldValue + '' + valor))
-			: setResultado(valor)
+	function mudaVisor(index) {
+		setOperacao(0)
 	}
 
 	return (
 		<>
-			<span id="calculadora-span1"></span>
 			<div id="calculadora">
-				<span id="calculadora-span2"></span>
+				<span id="calculadora-span1"></span>
 				<div id="visor">
 					<div id="operacao">
 						{operacao}
@@ -39,18 +29,20 @@ export function Calculadora() {
 
 				<div id="botoes">
 					{botoes.map(item => {
-						let tipo = parseInt(item) || parseInt(item) === 0 ? 'numero' : 'operador'
-
-						return <Botoes
-									tipo={tipo}
-									classe={item === '.' ? 'numero' : tipo}
-									onClick={() => mudaVisor(item)}
-								>
-									<div>{item}</div>
-								</Botoes>
+						return (
+							<Botoes
+								key={item.name}
+								classe={item.class}
+								onClick={() => mudaVisor(item)}
+							>
+								<div>{item.name}</div>
+							</Botoes>
+						)
 					})}
 				</div>
 			</div>
+			<span id="calculadora-span3"></span>
+			<span id="calculadora-span2"></span>
 		</>
 	)
 }
