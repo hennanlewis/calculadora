@@ -1,123 +1,86 @@
-// eslint-disable-next-line import/no-anonymous-default-export
+// eslint-disable-next-line
 export default [
 	{
 		name: 'AC',
-		type: 'função',
-		class: "non-number",
-		value: ''
+		class: 'non-number',
 	},
 	{
 		name: '×',
-		type: 'função',
-		class: "non-number",
-		value: ''
+		class: 'non-number',
 	},
 	{
 		name: '^',
-		type: 'operação',
-		class: "non-number",
-		value: '^'
+		class: 'non-number',
 	},
 	{
 		name: '/',
-		type: 'operação',
-		class: "non-number",
-		value: '/'
+		class: 'non-number',
 	},
 	{
 		name: '7',
-		type: 'número',
-		class: "number",
-		value: '7'
+		class: 'number',
 	},
 	{
 		name: '8',
-		type: 'número',
-		class: "number",
-		value: '8'
+		class: 'number',
 	},
 	{
 		name: '9',
-		type: 'número',
-		class: "number",
-		value: '9'
+		class: 'number',
 	},
 	{
 		name: '*',
-		type: 'operação',
-		class: "non-number",
-		value: '*'
+		class: 'non-number',
 	},
 	{
 		name: '4',
-		type: 'número',
-		class: "number",
-		value: '4'
+		class: 'number',
 	},
 	{
 		name: '5',
-		type: 'número',
-		class: "number",
-		value: '5'
+		class: 'number',
 	},
 	{
 		name: '6',
-		type: 'número',
-		class: "number",
-		value: '6'
+		class: 'number',
 	},
 	{
 		name: '-',
-		type: 'operação',
-		class: "non-number",
-		value: '-'
+		class: 'non-number',
 	},
 	{
 		name: '1',
-		type: 'número',
-		class: "number",
-		value: '1'
+		class: 'number',
 	},
 	{
 		name: '2',
-		type: 'número',
-		class: "number",
-		value: '2'
+		class: 'number',
 	},
 	{
 		name: '3',
-		type: 'número',
-		class: "number",
-		value: '3'
+		class: 'number',
 	},
 	{
 		name: '+',
-		type: 'operação',
-		class: "non-number",
-		value: '+'
+		class: 'non-number',
 	},
 	{
 		name: '0',
-		type: 'número',
-		class: "number",
-		value: '0'
+		class: 'number',
 	},
 	{
 		name: '00',
-		type: 'número',
-		class: "number",
-		value: '00'
+		class: 'number',
 	},
 	{
 		name: '.',
-		type: 'operacao',
-		class: "number",
-		value: '.'
+		class: 'number',
+		function: function(){
+			
+		}
 	},
 	{
 		name: '=',
-		type: 'função',
-		class: "non-number",
-		value: ''
+		class: 'non-number',
 	}
 ]

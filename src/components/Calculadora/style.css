@@ -56,6 +56,7 @@ body {
 
 #calculadora-span3 {
 	top: 0px;
+	background-color: #FFEEEE20;
 }
 
 #calculadora-span2 {
@@ -63,14 +64,13 @@ body {
 	width: 50px;
 	height: 400px;
 	top: 0;
-	left: -250px;
+	left: -50px;
 	overflow: hidden;
 }
 
 #calculadora-span2::before {
 	content: '';
-	margin-left: 250px;
-	transform: translateX(200px);
+	left: 50px;
 }
 
 #calculadora-span1 {
@@ -95,6 +95,7 @@ body {
 	overflow-y: hidden;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	pointer-events: none;
 }
 
 #visor #operacao,
@@ -105,6 +106,7 @@ body {
 
 #visor #resultado {
 	font-size: 1.75rem;
+	height: 2rem;
 }
 
 #botoes {
