@@ -6,196 +6,107 @@ import botoes from '../../services/botoes'
 import './style.css'
 
 export function Calculadora() {
-	const [operacao, setOperacao] = useState('0')
+	const [operacao, setOperacao] = useState(['0'])
+	const [operacaoVisor, setOperacaoVisor] = useState('0')
 	const [resultado, setResultado] = useState('0')
-	const [tipoUltimoInputNumero, setTipoUltimoInputNumero] = useState(true)
+	const [ultimoValor, setUltimoValor] = useState('')
+	const [tipoUltimoValor, setTipoUltimoValor] = useState('')
 
-	function pressionaBotao(entrada) {
-		entrada === 'AC' && botaoAC()
-		entrada === '×' && botaoX()
-		entrada === '0' && botao0()
-		entrada === '00' && botao00()
-		entrada === '1' && botao1()
-		entrada === '2' && botao2()
-		entrada === '3' && botao3()
-		entrada === '4' && botao4()
-		entrada === '5' && botao5()
-		entrada === '6' && botao6()
-		entrada === '7' && botao7()
-		entrada === '8' && botao8()
-		entrada === '9' && botao9()
-		entrada === '.' && botaoPonto()
-		entrada === '^' && botaoExponenciacao()
-		entrada === '/' && botaoDivisao()
-		entrada === '*' && botaoMultiplicacao()
-		entrada === '-' && botaoSubtracao()
-		entrada === '+' && botaoAdicao()
-		entrada === '=' && botaoIgualdade()
+	function handleBotao(entrada) {
+		let pressionaBotao = opcaoBotao[entrada]
+		pressionaBotao()
 	}
 
-	function botaoAC() {
-		console.log('Botão AC pressionado')
-		setResultado('0')
-		setOperacao('0')
+	function atualizaVisor(valor) {
+		setOperacao([...operacao, valor])
 	}
 
-	function botaoX() {
-		console.log('Botão × pressionado')
-		operacao.length === '1' || parseInt(operacao) < 10
-			? setOperacao('0')
-			: setOperacao(operacao.slice(0,-1))
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao0() {
-		console.log('Botão 0 pressionado')
-		try {
-			setOperacao(valorAnterior => valorAnterior + '0')
-			setTipoUltimoInputNumero(true)
-		} catch(error) {
+	const opcaoBotao = {
+		'AC': function() {
+			console.log('Botão AC pressionado')
+			setResultado('0')
 			setOperacao('0')
-			setResultado('Ocorreu um erro')
-		}
-	}
-
-	function botao00() {
-		console.log('Botão 00 pressionado')
-		try {
-			setOperacao(valorAnterior => valorAnterior + '00')
-		} catch(error) {
-			setResultado('Ocorreu um erro')
-		}
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao1() {
-		console.log('Botão 1 pressionado')
-		operacao === '0'
-			? setOperacao('1')
-			: setOperacao(valorAnterior => valorAnterior + '1')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao2() {
-		console.log('Botão 2 pressionado')
-		operacao === '0'
-			? setOperacao('2')
-			: setOperacao(valorAnterior => valorAnterior + '2')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao3() {
-		console.log('Botão 3 pressionado')
-		operacao === '0'
-			? setOperacao('3')
-			: setOperacao(valorAnterior => valorAnterior + '3')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao4() {
-		console.log('Botão 4 pressionado')
-		operacao === '0'
-			? setOperacao('4')
-			: setOperacao(valorAnterior => valorAnterior + '4')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao5() {
-		console.log('Botão 5 pressionado')
-		operacao === '0'
-			? setOperacao('5')
-			: setOperacao(valorAnterior => valorAnterior + '5')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao6() {
-		console.log('Botão 6 pressionado')
-		operacao === '0'
-			? setOperacao('6')
-			: setOperacao(valorAnterior => valorAnterior + '6')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao7() {
-		console.log('Botão 7 pressionado')
-		operacao === '0'
-			? setOperacao('7')
-			: setOperacao(valorAnterior => valorAnterior + '7')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao8() {
-		console.log('Botão 8 pressionado')
-		operacao === '0'
-			? setOperacao('8')
-			: setOperacao(valorAnterior => valorAnterior + '8')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botao9() {
-		console.log('Botão 9 pressionado')
-		operacao === '0'
-			? setOperacao('9')
-			: setOperacao(valorAnterior => valorAnterior + '9')
-		setTipoUltimoInputNumero(true)
-	}
-
-	function botaoPonto() {
-		console.log('Botão . pressionado')
-		if(tipoUltimoInputNumero)
-			setOperacao(valorAnterior => valorAnterior + '.')
-		else {
-			botaoX()
-		}
-		setTipoUltimoInputNumero(false)
-	}
-
-	function botaoExponenciacao() {
-		console.log('Botão ^ pressionado')
-		tipoUltimoInputNumero
-			? setOperacao(valorAnterior => valorAnterior + '^')
-			: setOperacao(valorAnterior => valorAnterior.slice(-1,0) + '^')
-		setTipoUltimoInputNumero(false)
-	}
-
-	function botaoDivisao() {
-		console.log('Botão / pressionado')
-		tipoUltimoInputNumero
-			? setOperacao(valorAnterior => valorAnterior + '/')
-			: setOperacao(valorAnterior => valorAnterior.slice(-1,0) + '/')
-		setTipoUltimoInputNumero(false)
-	}
-
-	function botaoMultiplicacao() {
-		console.log('Botão * pressionado')
-		tipoUltimoInputNumero
-			? setOperacao(valorAnterior => valorAnterior + '*')
-			: setOperacao(valorAnterior => valorAnterior.slice(-1,0) + '*')
-		setTipoUltimoInputNumero(false)
-	}
-
-	function botaoSubtracao() {
-		console.log('Botão - pressionado')
-		tipoUltimoInputNumero
-			? setOperacao(valorAnterior => valorAnterior + '-')
-			: setOperacao(valorAnterior => valorAnterior.slice(-1,0) + '-')
-		setTipoUltimoInputNumero(false)
-	}
-
-	function botaoAdicao() {
-		console.log('Botão + pressionado')
-		tipoUltimoInputNumero
-			? setOperacao(valorAnterior => valorAnterior + '+')
-			: setOperacao(valorAnterior => valorAnterior.slice(-1,0) + '+')
-		setTipoUltimoInputNumero(false)
-	}
-
-	function botaoIgualdade() {
-		console.log('Botão = pressionado')
-		try {
-			setResultado((operacao))
-		} catch(error) {
-			console.error(error)
+			setOperacaoVisor('0')
+		},
+		'DEL': function() {
+			console.log('Botão DEL pressionado')
+			operacao.length < 2
+				? setOperacao('0')
+				: setOperacao(operacao.slice(-1, 0))
+		},
+		'MUDA': function() {
+			console.log('Botão MUDA pressionado')
+		},
+		'0': function() {
+			console.log('Botão 0 pressionado')
+			setOperacao([...operacao, '0'])
+			setOperacaoVisor([...operacao, '0'])
+		},
+		'1': function() {
+			console.log('Botão 1 pressionado')
+			setOperacao([...operacao, '1'])
+			setOperacaoVisor([...operacao, '1'])
+		},
+		'2': function() {
+			console.log('Botão 2 pressionado')
+			setOperacao([...operacao, '2'])
+			setOperacaoVisor([...operacao, '2'])
+		},
+		'3': function() {
+			console.log('Botão 3 pressionado')
+			setOperacao([...operacao, '3'])
+			setOperacaoVisor([...operacao, '3'])
+		},
+		'4': function() {
+			console.log('Botão 4 pressionado')
+			setOperacao([...operacao, '4'])
+			setOperacaoVisor([...operacao, '4'])
+		},
+		'5': function() {
+			console.log('Botão 5 pressionado')
+			setOperacao([...operacao, '5'])
+			setOperacaoVisor([...operacao, '5'])
+		},
+		'6': function() {
+			console.log('Botão 6 pressionado')
+			setOperacao([...operacao, '6'])
+			setOperacaoVisor([...operacao, '6'])
+		},
+		'7': function() {
+			console.log('Botão 7 pressionado')
+			setOperacao([...operacao, '7'])
+			setOperacaoVisor([...operacao, '7'])
+		},
+		'8': function() {
+			console.log('Botão 8 pressionado')
+			setOperacao([...operacao, '8'])
+			setOperacaoVisor([...operacao, '8'])
+		},
+		'9': function() {
+			console.log('Botão 9 pressionado')
+			setOperacao([...operacao, '9'])
+			setOperacaoVisor([...operacao, '9'])
+		},
+		'+': function() {
+			console.log('Botão + pressionado')
+		},
+		'-': function() {
+			console.log('Botão - pressionado')
+		},
+		'÷': function() {
+			console.log('Botão ÷ pressionado')
+		},
+		'×': function() {
+			console.log('Botão × pressionado')
+		},
+		'^': function() {
+			console.log('Botão ^ pressionado')
+		},
+		'.': function() {
+			console.log('Botão . pressionado')
+		},
+		'=': function() {
+			console.log('Botão = pressionado')
 		}
 	}
 
@@ -205,7 +116,7 @@ export function Calculadora() {
 				<span id="calculadora-span1"></span>
 				<div id="visor">
 					<div id="operacao">
-						{operacao}
+						{operacaoVisor}
 					</div>
 
 					<div id="resultado">
@@ -219,7 +130,7 @@ export function Calculadora() {
 							<Botoes
 								key={item.name}
 								classe={item.class}
-								onClick={() => pressionaBotao(item.name)}
+								onClick={() => handleBotao(item.name)}
 							>
 								<div>{item.name}</div>
 							</Botoes>

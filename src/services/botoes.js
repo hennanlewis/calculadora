@@ -5,15 +5,15 @@ export default [
 		class: 'non-number',
 	},
 	{
-		name: '×',
+		name: 'DEL',
+		class: 'non-number',
+	},
+	{
+		name: 'MUDA',
 		class: 'non-number',
 	},
 	{
 		name: '^',
-		class: 'non-number',
-	},
-	{
-		name: '/',
 		class: 'non-number',
 	},
 	{
@@ -29,7 +29,7 @@ export default [
 		class: 'number',
 	},
 	{
-		name: '*',
+		name: '÷',
 		class: 'non-number',
 	},
 	{
@@ -45,7 +45,7 @@ export default [
 		class: 'number',
 	},
 	{
-		name: '-',
+		name: '×',
 		class: 'non-number',
 	},
 	{
@@ -61,7 +61,11 @@ export default [
 		class: 'number',
 	},
 	{
-		name: '+',
+		name: '-',
+		class: 'non-number',
+	},
+	{
+		name: '=',
 		class: 'non-number',
 	},
 	{
@@ -69,18 +73,11 @@ export default [
 		class: 'number',
 	},
 	{
-		name: '00',
-		class: 'number',
-	},
-	{
 		name: '.',
 		class: 'number',
-		function: function(){
-			
-		}
 	},
 	{
-		name: '=',
+		name: '+',
 		class: 'non-number',
 	}
 ]

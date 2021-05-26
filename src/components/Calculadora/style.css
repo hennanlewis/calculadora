@@ -150,7 +150,8 @@ body {
 	height: 100%;
 }
 
-#botoes .number {
+#botoes .number,
+#botoes .non-number:nth-child(17) {
 	border-radius: 10px;
 }
 
