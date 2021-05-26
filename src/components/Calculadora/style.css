@@ -26,8 +26,8 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-end;
-	height: 400px;
 	width: 250px;
+	height: 450px;
 	background-color: #FFFFFF18;
 	border-radius: 18px;
 	padding: 10px;
@@ -91,7 +91,7 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 	text-align: right;
-	height: 35%;
+	height: 40%;
 	overflow-y: hidden;
 	margin-top: 10px;
 	margin-bottom: 10px;

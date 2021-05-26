@@ -6,107 +6,146 @@ import botoes from '../../services/botoes'
 import './style.css'
 
 export function Calculadora() {
-	const [operacao, setOperacao] = useState(['0'])
-	const [operacaoVisor, setOperacaoVisor] = useState('0')
-	const [resultado, setResultado] = useState('0')
-	const [ultimoValor, setUltimoValor] = useState('')
+	const [visorOperacao, setVisorOperacao] = useState('0')
+	const [visorResultado, setVisorResultado] = useState('0')
 	const [tipoUltimoValor, setTipoUltimoValor] = useState('')
+	const [flagDecimal, setFlagDecimal] = useState(false)
 
 	function handleBotao(entrada) {
+		console.log('Botão ' + entrada + ' pressionado')
 		let pressionaBotao = opcaoBotao[entrada]
 		pressionaBotao()
 	}
 
-	function atualizaVisor(valor) {
-		setOperacao([...operacao, valor])
+	function atualizaVisor(valor, tipoValor) {
+		let tamanhoVetor = tipoUltimoValor.length
+		if(tipoValor === 'operação' && tipoValor === tipoUltimoValor[tamanhoVetor - 1]) {
+			setFlagDecimal(false)
+			deletaUltimoValor()
+		}
+
+		visorOperacao === '0'
+			? setVisorOperacao(valor)
+			: setVisorOperacao(valorAnterior => valorAnterior + valor)
+
+		setTipoUltimoValor([...tipoUltimoValor, tipoValor])
+	}
+
+	function deletaUltimoValor() {
+		if(visorOperacao.length < 2) {
+			setVisorOperacao('0')
+			setTipoUltimoValor()
+			setFlagDecimal(false)
+			return
+		}
+
+		let tamanhoVetor = visorOperacao.length
+		setVisorOperacao(valorAnterior => valorAnterior.slice(0, tamanhoVetor - 1))
+		setTipoUltimoValor(valorAnterior => valorAnterior.slice(0, tamanhoVetor - 1))
+		visorOperacao[tamanhoVetor - 1] === '.' && setFlagDecimal(false)
+	}
+
+	function calculaResultado() {
+		let tamanho = tipoUltimoValor.length
+		tipoUltimoValor[tamanho - 1] === 'operação' && deletaUltimoValor()
+
+		let valores = visorOperacao.replaceAll(/(\+|-|÷|×|\^)/g, ' $1 ')
+		valores = valores.split(' ')
+		console.log(valores)
+		valores = substituiExpressao(valores, '^')
+		valores = substituiExpressao(valores, '×')
+		valores = substituiExpressao(valores, '÷')
+		valores = substituiExpressao(valores, '+')
+		valores = substituiExpressao(valores, '-')
+		console.log(valores)
+		setVisorResultado(valores)
+	}
+
+	function substituiExpressao(vetor, expressao) {
+		let index = 0
+		while(vetor.indexOf(expressao) !== -1) {
+			index = vetor.indexOf(expressao)
+			if(expressao === '^')
+				vetor[index - 1] = Math.pow(parseFloat(vetor[index - 1]), parseFloat(vetor[index + 1]))
+			if(expressao === '×')
+				vetor[index - 1] = parseFloat(vetor[index - 1]) * parseFloat(vetor[index + 1])
+			if(expressao === '÷')
+				vetor[index - 1] = parseFloat(vetor[index - 1]) / parseFloat(vetor[index + 1])
+			if(expressao === '+')
+				vetor[index - 1] = parseFloat(vetor[index - 1]) + parseFloat(vetor[index + 1])
+			if(expressao === '-')
+				vetor[index - 1] = parseFloat(vetor[index - 1]) - parseFloat(vetor[index + 1])
+
+			vetor.splice(index, index + 1)
+		}
+		return vetor
 	}
 
 	const opcaoBotao = {
 		'AC': function() {
-			console.log('Botão AC pressionado')
-			setResultado('0')
-			setOperacao('0')
-			setOperacaoVisor('0')
+			setVisorResultado('0')
+			setVisorOperacao('0')
+			setTipoUltimoValor('número')
 		},
 		'DEL': function() {
-			console.log('Botão DEL pressionado')
-			operacao.length < 2
-				? setOperacao('0')
-				: setOperacao(operacao.slice(-1, 0))
+			deletaUltimoValor()
+			setTipoUltimoValor('número')
 		},
 		'MUDA': function() {
-			console.log('Botão MUDA pressionado')
 		},
 		'0': function() {
-			console.log('Botão 0 pressionado')
-			setOperacao([...operacao, '0'])
-			setOperacaoVisor([...operacao, '0'])
+			atualizaVisor('0', 'número')
 		},
 		'1': function() {
-			console.log('Botão 1 pressionado')
-			setOperacao([...operacao, '1'])
-			setOperacaoVisor([...operacao, '1'])
+			atualizaVisor('1', 'número')
 		},
 		'2': function() {
-			console.log('Botão 2 pressionado')
-			setOperacao([...operacao, '2'])
-			setOperacaoVisor([...operacao, '2'])
+			atualizaVisor('2', 'número')
 		},
 		'3': function() {
-			console.log('Botão 3 pressionado')
-			setOperacao([...operacao, '3'])
-			setOperacaoVisor([...operacao, '3'])
+			atualizaVisor('3', 'número')
 		},
 		'4': function() {
-			console.log('Botão 4 pressionado')
-			setOperacao([...operacao, '4'])
-			setOperacaoVisor([...operacao, '4'])
+			atualizaVisor('4', 'número')
 		},
 		'5': function() {
-			console.log('Botão 5 pressionado')
-			setOperacao([...operacao, '5'])
-			setOperacaoVisor([...operacao, '5'])
+			atualizaVisor('5', 'número')
 		},
 		'6': function() {
-			console.log('Botão 6 pressionado')
-			setOperacao([...operacao, '6'])
-			setOperacaoVisor([...operacao, '6'])
+			atualizaVisor('6', 'número')
 		},
 		'7': function() {
-			console.log('Botão 7 pressionado')
-			setOperacao([...operacao, '7'])
-			setOperacaoVisor([...operacao, '7'])
+			atualizaVisor('7', 'número')
 		},
 		'8': function() {
-			console.log('Botão 8 pressionado')
-			setOperacao([...operacao, '8'])
-			setOperacaoVisor([...operacao, '8'])
+			atualizaVisor('8', 'número')
 		},
 		'9': function() {
-			console.log('Botão 9 pressionado')
-			setOperacao([...operacao, '9'])
-			setOperacaoVisor([...operacao, '9'])
+			atualizaVisor('9', 'número')
 		},
 		'+': function() {
-			console.log('Botão + pressionado')
+			atualizaVisor('+', 'operação')
 		},
 		'-': function() {
-			console.log('Botão - pressionado')
+			atualizaVisor('-', 'operação')
 		},
 		'÷': function() {
-			console.log('Botão ÷ pressionado')
+			atualizaVisor('÷', 'operação')
 		},
 		'×': function() {
-			console.log('Botão × pressionado')
+			atualizaVisor('×', 'operação')
 		},
 		'^': function() {
-			console.log('Botão ^ pressionado')
+			atualizaVisor('^', 'operação')
 		},
 		'.': function() {
-			console.log('Botão . pressionado')
+			if(flagDecimal === false) {
+				atualizaVisor('.', 'operação')
+				setFlagDecimal(true)
+			}
 		},
 		'=': function() {
-			console.log('Botão = pressionado')
+			calculaResultado()
 		}
 	}
 
@@ -116,11 +155,11 @@ export function Calculadora() {
 				<span id="calculadora-span1"></span>
 				<div id="visor">
 					<div id="operacao">
-						{operacaoVisor}
+						{visorOperacao}
 					</div>
 
 					<div id="resultado">
-						{resultado}
+						{visorResultado}
 					</div>
 				</div>
 
