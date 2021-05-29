@@ -9,7 +9,7 @@ export default [
 		class: 'non-number',
 	},
 	{
-		name: 'MUDA',
+		name: '',
 		class: 'non-number',
 	},
 	{

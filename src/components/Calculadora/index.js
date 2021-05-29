@@ -9,18 +9,20 @@ export function Calculadora() {
 	const [visorOperacao, setVisorOperacao] = useState('0')
 	const [visorResultado, setVisorResultado] = useState('0')
 	const [tipoUltimoValor, setTipoUltimoValor] = useState('')
-	const [flagDecimal, setFlagDecimal] = useState(false)
 
 	function handleBotao(entrada) {
 		console.log('Botão ' + entrada + ' pressionado')
 		let pressionaBotao = opcaoBotao[entrada]
-		pressionaBotao()
+		pressionaBotao && pressionaBotao()
+		console.log(visorOperacao)
 	}
-
+	
 	function atualizaVisor(valor, tipoValor) {
 		let tamanhoVetor = tipoUltimoValor.length
-		if (tipoValor === 'operação' && tipoValor === tipoUltimoValor[tamanhoVetor - 1]) {
-			setFlagDecimal(false)
+		if((visorOperacao + valor).match(/.\.+\d+\./g))
+			return
+
+		if (tipoValor === 'operação' && 'operação' === tipoUltimoValor[tamanhoVetor - 1]) {
 			deletaUltimoValor()
 		}
 
@@ -32,32 +34,35 @@ export function Calculadora() {
 	}
 
 	function deletaUltimoValor() {
+		let tamanhoVetor = visorOperacao.length
 		if (visorOperacao.length < 2) {
 			setVisorOperacao('0')
 			setTipoUltimoValor()
-			setFlagDecimal(false)
 			return
 		}
 
-		let tamanhoVetor = visorOperacao.length
 		setVisorOperacao(valorAnterior => valorAnterior.slice(0, tamanhoVetor - 1))
 		setTipoUltimoValor(valorAnterior => valorAnterior.slice(0, tamanhoVetor - 1))
-		visorOperacao[tamanhoVetor - 1] === '.' && setFlagDecimal(false)
 	}
 
 	function calculaResultado() {
 		let tamanho = tipoUltimoValor.length
-		tipoUltimoValor[tamanho - 1] === 'operação' && deletaUltimoValor()
-
 		let valores = visorOperacao.replaceAll(/(\+|-|÷|×|\^)/g, ' $1 ')
 		valores = valores.split(' ')
+
+		if(tipoUltimoValor[tamanho - 1] === 'operação') {
+			deletaUltimoValor()
+			valores.splice(-2)
+		}
+
 		console.log(valores)
 		valores = calculaExponenciacao(valores)
 		valores = calculaMultiDivi(valores)
 		valores = calculaSomaSub(valores)
 		setVisorResultado(valores)
+		setVisorOperacao('0')
 	}
-
+	
 	function calculaExponenciacao(vetor) {
 		let index = 0
 		while (vetor.indexOf('^') !== -1) {
@@ -65,16 +70,15 @@ export function Calculadora() {
 			vetor[index - 1] = Math.pow(parseFloat(vetor[index - 1]), parseFloat(vetor[index + 1]))
 			vetor.splice(index, index + 1)
 		}
-		console.log('Expressão após cálculo de todas as exponenciações: ' + [vetor])	
 		return vetor
 	}
 	
 	function calculaMultiDivi(vetor) {
 		let index = 0
-		while (vetor.indexOf('×') !== -1 || vetor.indexOf('÷') !== -1) {
+		while (vetor.indexOf('÷') !== -1 || vetor.indexOf('×') !== -1) {
 			let indexMultiplicacao = vetor.indexOf('×') === -1 ? Infinity : vetor.indexOf('×')
 			let indexDivisao = vetor.indexOf('÷') === -1 ? Infinity : vetor.indexOf('÷')
-			
+
 			if(indexMultiplicacao < indexDivisao) {
 				vetor[indexMultiplicacao - 1] = parseFloat(vetor[indexMultiplicacao - 1]) * parseFloat(vetor[indexMultiplicacao + 1])
 				index = indexMultiplicacao
@@ -84,17 +88,15 @@ export function Calculadora() {
 			}
 			vetor.splice(index, index + 1)
 		}
-		
-		console.log('Expressão após cálculo de todas as multiplicações e divisões: ' + [vetor])	
 		return vetor
 	}
-	
+
 	function calculaSomaSub(vetor) {
 		let index = 0
 		while (vetor.indexOf('+') !== -1 || vetor.indexOf('-') !== -1) {
 			let indexAdicao = vetor.indexOf('+') === -1 ? Infinity : vetor.indexOf('+')
 			let indexSubtracao = vetor.indexOf('-') === -1 ? Infinity : vetor.indexOf('-')
-			
+
 			if(indexAdicao < indexSubtracao) {
 				vetor[indexAdicao - 1] = parseFloat(vetor[indexAdicao - 1]) + parseFloat(vetor[indexAdicao + 1])
 				index = indexAdicao
@@ -104,8 +106,6 @@ export function Calculadora() {
 			}
 			vetor.splice(index, index + 1)
 		}
-		
-		console.log('Expressão após cálculo de todas as adições e subtrações: ' + [vetor])	
 		return vetor
 	}
 
@@ -152,25 +152,43 @@ export function Calculadora() {
 			atualizaVisor('9', 'número')
 		},
 		'+': function () {
-			atualizaVisor('+', 'operação')
+			visorOperacao === '0'
+				? atualizaVisor('0+', 'operação')
+				: atualizaVisor('+', 'operação')
 		},
 		'-': function () {
-			atualizaVisor('-', 'operação')
+			visorOperacao === '0'
+				? atualizaVisor('0-', 'operação')
+				: atualizaVisor('-', 'operação')
 		},
 		'÷': function () {
-			atualizaVisor('÷', 'operação')
+			visorOperacao === '0'
+				? atualizaVisor('0÷', 'operação')
+				: atualizaVisor('÷', 'operação')
 		},
 		'×': function () {
-			atualizaVisor('×', 'operação')
+			visorOperacao === '0'
+				? atualizaVisor('0×', 'operação')
+				: atualizaVisor('×', 'operação')
 		},
 		'^': function () {
-			atualizaVisor('^', 'operação')
+			visorOperacao === '0'
+				? atualizaVisor('0^', 'operação')
+				: atualizaVisor('^', 'operação')
 		},
 		'.': function () {
-			if (flagDecimal === false) {
-				atualizaVisor('.', 'operação')
-				setFlagDecimal(true)
+			let tamanho = visorOperacao.length
+			if(visorOperacao === '0') {
+				atualizaVisor('0.', 'operação')
+				return
 			}
+
+			if(visorOperacao[tamanho - 1] === '+' || visorOperacao[tamanho - 1] === '-') {
+				atualizaVisor(visorOperacao[tamanho - 1] + '0.', 'operação')
+				return
+			}
+				
+			atualizaVisor('.', 'operação')
 		},
 		'=': function () {
 			calculaResultado()
