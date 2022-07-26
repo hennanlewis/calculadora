@@ -7,23 +7,23 @@ export const Buttons = ({ handleClickButton }: ButtonsProps) => {
 		{ name: "AC", className: "bg-red-900/60 hover:brightness-125 rounded-l-lg" },
 		{ name: "del", className: "bg-red-900/60 hover:brightness-125" },
 		{ name: " ", className: "bg-red-900/60" },
-		{ name: "^", className: "bg-red-900/60 hover:brightness-125 rounded-tr-lg" },
+		{ id: "buttonPow", name: "^", className: "bg-red-900/60 hover:brightness-125 rounded-tr-lg" },
 		{ name: "7", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
 		{ name: "8", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
 		{ name: "9", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
-		{ name: "/", className: "bg-red-900/60 hover:brightness-125" },
+		{ id: "buttonDivision", name: "/", className: "bg-red-900/60 hover:brightness-125" },
 		{ name: "4", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
 		{ name: "5", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
 		{ name: "6", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
-		{ name: "*", className: "bg-red-900/60 hover:brightness-125" },
+		{ id: "buttonMultiplication", name: "*", className: "bg-red-900/60 hover:brightness-125" },
 		{ name: "1", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
 		{ name: "2", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
 		{ name: "3", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
-		{ name: "-", className: "bg-red-900/60 hover:brightness-125" },
-		{ name: "=", className: "bg-red-900/60 hover:brightness-125 rounded-lg" },
+		{ id: "buttonSubtraction", name: "-", className: "bg-red-900/60 hover:brightness-125" },
+		{ id: "result", name: "=", className: "bg-red-900/60 hover:brightness-125 rounded-lg" },
 		{ name: "0", className: "bg-gray-800/80 hover:brightness-125 rounded-lg" },
-		{ name: ".", className: "bg-red-900/60 hover:brightness-125 rounded-l-lg" },
-		{ name: "+", className: "bg-red-900/60 hover:brightness-125 rounded-br-lg" }
+		{ id: "buttonPoint", name: ".", className: "bg-red-900/60 hover:brightness-125 rounded-l-lg" },
+		{ id: "buttonAddition", name: "+", className: "bg-red-900/60 hover:brightness-125 rounded-br-lg" }
 	]
 
 	return (
@@ -31,6 +31,7 @@ export const Buttons = ({ handleClickButton }: ButtonsProps) => {
 			{buttons.map(item =>
 				<button
 					key={item.name}
+					id={item.id ? item.id : `button${item.name}`}
 					className={item.className}
 					onClick={handleClickButton}
 				>

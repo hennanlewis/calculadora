@@ -1,9 +1,9 @@
-import React from "react"
 import { render, screen } from "@testing-library/react"
+import { click } from "@testing-library/user-event/dist/click"
 import App from "./App"
 
-test("renders learn react link", () => {
+test("render all buttons", () => {
 	render(<App />)
-	const linkElement = screen.getByText(/learn react/i)
-	expect(linkElement).toBeInTheDocument()
+	const buttonsElements = screen.getAllByRole("button")
+	expect(buttonsElements.length).toBe(20)
 })
