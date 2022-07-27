@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Calculadora diferentona
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esse projeto é um projeto simples de uma calculadora, porem funciona através da transformação de expressão infixa para posfixa.
 
-## Available Scripts
+### Mas o que é uma expressão infixa e posfixa?
+Na expressão infixa, a posição dos operadores matemáticos fica entre os números, da seguinte forma: `a+b`.
+Na expressão posfixa, a disposição dos operadores acontece após os dois números a serem operados, da seguinte forma: `ab+`.
 
-In the project directory, you can run:
+Em casos de expressões com mais de um operador, a resultado do cálculo acontece de forma a calcular as operações que aparecem antes da esquerda pra direita.
 
-### `yarn start`
+### Comparação de cálculo entre os dois tipos
+Os próximos exemplos demonstram o funcionamento das expressões da notação infixa e posfixa equivalentes, respectivamente:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`a+b*c-d = a+e-d = f-d = g`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`abc*+d- = ae+d- = fd- = g `
 
-### `yarn test`
+Como podemos observar, no segundo tipo de notação, não existe a necessidade de fazer a checagem de quais números operar primeiro, pois a ordem apresentada indica a operação, o que facilita a interpretação da expressão por um algoritmo para calcular. O algoritmo de conversão é um tanto complicado de entender a princípio, mas depois de entender ele é até bastante simples e genial!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Clique aqui para ir ao arquivo com o algoritmo de conversão.](src/utils/infixToPostfixFormat.ts)
 
-### `yarn build`
+## Como executar o projeto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Após clonar o repositório, o seguinte código instala as dependências necessárias:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```shell
+yarn
+```
+Caso tenha preferência pelo `npm` como gerenciador de pacotes, utilize:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```shell
+npm install
+```
 
-### `yarn eject`
+2. Após a finalização da instalação das dependências necessárias, o seguinte código executa a aplicação:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```shell
+yarn start
+```
+ou caso tenha preferência pelo `npm` como gerenciador de pacotes:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```shell
+npm start
+```
+* Caso a aplicação não abra automaticamente no navegador, abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Para parar a aplicação, pressione `ctrl+c` no teclado.
