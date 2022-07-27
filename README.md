@@ -1,6 +1,6 @@
 # Calculadora diferentona
 
-Esse projeto é um projeto simples de uma calculadora, porem funciona através da transformação de expressão infixa para posfixa.
+Este é um projeto simples de uma calculadora, porém funciona através da transformação de expressão infixa para posfixa.
 
 ### Mas o que é uma expressão infixa e posfixa?
 Na expressão infixa, a posição dos operadores matemáticos fica entre os números, da seguinte forma: `a+b`.
