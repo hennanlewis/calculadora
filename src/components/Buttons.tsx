@@ -1,8 +1,8 @@
 interface ButtonsProps {
-	handleClickButton: (event: React.MouseEvent<HTMLButtonElement>) => void
+	handleClickButton?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export const Buttons = ({ handleClickButton }: ButtonsProps) => {
+export const Buttons = ({ handleClickButton }: (ButtonsProps)) => {
 	const buttons = [
 		{ name: "AC", className: "bg-red-900/60 hover:brightness-125 rounded-l-lg" },
 		{ name: "del", className: "bg-red-900/60 hover:brightness-125" },
@@ -31,7 +31,7 @@ export const Buttons = ({ handleClickButton }: ButtonsProps) => {
 			{buttons.map(item =>
 				<button
 					key={item.name}
-					id={item.id ? item.id : `button${item.name}`}
+					data-testid={item.id ? item.id : `button${item.name}`}
 					className={item.className}
 					onClick={handleClickButton}
 				>

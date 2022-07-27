@@ -22,10 +22,7 @@ export const infixToPostfixFormat = (expression: string): string[] => {
 		if (item === ")") {
 			while (1) {
 				operationsStackTop = operationsStack.pop() as string
-
-				if (operationsStackTop !== "(") {
-					output.push(operationsStackTop)
-				}
+				output.push(operationsStackTop)
 
 				if (operationsStackTop === "(" || !operationsStackTop) {
 					return null

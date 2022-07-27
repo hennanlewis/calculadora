@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react"
-import { click } from "@testing-library/user-event/dist/click"
+import { fireEvent, render, screen, waitFor } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import App from "./App"
 
-test("render all buttons", () => {
+test("render all buttons", async () => {
 	render(<App />)
-	const buttonsElements = screen.getAllByRole("button")
-	expect(buttonsElements.length).toBe(20)
+	const buttons = screen.getAllByRole("button")
+	expect(buttons.length).toBe(20)
 })

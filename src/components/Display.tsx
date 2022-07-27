@@ -12,7 +12,7 @@ export const Display = ({ displayExpression, displayValue }: DisplayProps) => {
 			<span id="display-value" className="text-ellipsis overflow-hidden w-11/12 font-thin text-4xl text-right">
 				{displayValue}
 			</span>
-			<span id="display-expression" className="flex px-1 break-all text-right text-ellipsis">
+			<span id="display-expression" data-testid="display-expression" className="flex px-1 break-all text-right text-ellipsis">
 				{validateExpression(displayExpression)}
 			</span>
 		</div>
